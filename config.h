@@ -11,9 +11,9 @@
 
 /* EDIT THIS: general settings */
 #define MASTER_SIZE     0.6       /* master-stack ratio */
-#define SHOW_PANEL      False     /* show panel by default on exec */
-#define TOP_PANEL       True      /* False means panel is on bottom */
-#define PANEL_HEIGHT    18        /* 0 for no space for panel, thus no panel */
+#define SHOW_PANEL      True     /* show panel by default on exec */
+#define TOP_PANEL       False      /* False means panel is on bottom */
+#define PANEL_HEIGHT    25        /* 0 for no space for panel, thus no panel */
 #define DEFAULT_MODE    TILE      /* TILE MONOCLE BSTACK GRID FIBONACCI EQUAL */
 #define ATTACH_ASIDE    True      /* False means new window is master */
 #define FOLLOW_MOUSE    False     /* Focus the window the mouse just entered */
@@ -65,9 +65,9 @@ static const AppRule rules[] = { \
  * window. The title of the scratchpad window should also match SCRPDNAME from
  * above
  */
-static const char *termcmd[] = { "xterm",     NULL };
-static const char *menucmd[] = { "dmenu_run", NULL };
-static const char *scrpcmd[] = { "xterm", "-T", "scratchpad", NULL };
+static const char *termcmd[] = { "st",     NULL };
+static const char *menucmd[] = { "nwggrid", NULL };
+static const char *scrpcmd[] = { "st", "-T", "scratchpad", NULL };
 /* static const char *scrpcmd[] = { "urxvt", "-name", "scratchpad",  NULL }; */
 
 #define DESKTOPCHANGE(K,N) \
@@ -134,7 +134,7 @@ static key keys[] = {
     {  MOD4|SHIFT,       XK_z,          rotate_mode,       {.i = -1}},
     {  MOD4|SHIFT,       XK_x,          rotate_mode,       {.i = +1}},
 
-    /* spawn terminal, dmenu, w/e you want to */
+    /* spawn terminal, menu, w/e you want to */
     {  MOD4|SHIFT,       XK_Return,     spawn,             {.com = termcmd}},
     {  MOD4,             XK_r,          spawn,             {.com = menucmd}},
     /* kill current window */
