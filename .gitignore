@@ -1,7 +1,0 @@
-frankenwm
-*.o
-*.swp
-*~
-*.diff
-tags
-config.h
