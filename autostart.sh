@@ -10,6 +10,7 @@ function run {
 #Special python script for auto wallpaper and colorscheme change
 ~/.config/qtile/scripts/pywal-colors.py
 
+bash ~/.config/polybar/launch.sh --cuts
 
 #feh --bg-fill ~/.config/qtile/flower.jpg &
 #conky -c ~/.config/conky/conky.conf &
