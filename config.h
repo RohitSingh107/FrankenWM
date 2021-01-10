@@ -66,6 +66,7 @@ static const AppRule rules[] = { \
  * above
  */
 static const char *termcmd[] = { "st",     NULL };
+static const char *screenshotcmd[] = { "ksnip",     NULL };
 static const char *menucmd[] = { "nwggrid", NULL };
 static const char *scrpcmd[] = { "st", "-T", "scratchpad", NULL };
 /* static const char *scrpcmd[] = { "urxvt", "-name", "scratchpad",  NULL }; */
@@ -136,7 +137,7 @@ static key keys[] = {
 
     /* spawn terminal, menu, w/e you want to */
     {  MOD4|SHIFT,       XK_Return,     spawn,             {.com = termcmd}},
-    {  MOD4,             XK_r,          spawn,             {.com = menucmd}},
+    {  MOD4,             XK_r,          spawn,             {.com = screenshotcmd}},
     /* kill current window */
     {  MOD4|SHIFT,       XK_c,          killclient,        {NULL}},
 
