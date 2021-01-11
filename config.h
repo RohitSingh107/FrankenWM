@@ -66,7 +66,7 @@ static const AppRule rules[] = { \
  * above
  */
 static const char *termcmd[] = { "st",     NULL };
-static const char *screenshotcmd[] = { "ksnip",     NULL };
+static const char *screenshotcmd[] = { "nwggrid",     NULL };
 static const char *menucmd[] = { "nwggrid", NULL };
 static const char *scrpcmd[] = { "st", "-T", "scratchpad", NULL };
 /* static const char *scrpcmd[] = { "urxvt", "-name", "scratchpad",  NULL }; */
