@@ -21,7 +21,7 @@
 #define CLICK_TO_FOCUS  True      /* Focus an unfocused window when clicked */
 #define BORDER_WIDTH    2         /* window border width */
 #define SCRATCH_WIDTH   1         /* scratch window border width, 0 to disable */
-#define FOCUS           "#cccccc" /* focused window border color   */
+#define FOCUS           "#ff00ff" /* focused window border color   */
 #define UNFOCUS         "#121212" /* unfocused window border color */
 #define SCRATCH         "#cc0000" /* scratchpad border color */
 #define DESKTOPS        10        /* number of desktops - edit DESKTOPCHANGE keys to suit */
@@ -68,6 +68,7 @@ static const AppRule rules[] = { \
 static const char *termcmd[] = { "st",     NULL };
 static const char *screenshotcmd[] = { "nwggrid",     NULL };
 static const char *menucmd[] = { "nwggrid", NULL };
+static const char *startcmd[] = { "/home/rohit/.config/FrankenWM/autostart.sh", NULL };
 static const char *scrpcmd[] = { "st", "-T", "scratchpad", NULL };
 /* static const char *scrpcmd[] = { "urxvt", "-name", "scratchpad",  NULL }; */
 
@@ -84,19 +85,24 @@ static const char *scrpcmd[] = { "st", "-T", "scratchpad", NULL };
 static key keys[] = {
     /* modifier          key            function           argument */
 
+
     /* select windows */
-    {  MOD4,             XK_j,          next_win,          {NULL}},
-    {  MOD4,             XK_k,          prev_win,          {NULL}},
+    {  MOD4,             XK_o,          next_win,          {NULL}},
+    {  MOD4,             XK_p,          prev_win,          {NULL}},
     /* select the master window, or the previously focussed slave */
     {  MOD4,             XK_w,          focusmaster,       {NULL}},
     /* select urgent window */
     {  MOD4,             XK_BackSpace,  focusurgent,       {NULL}},
 
+
+
+
+
     /* move windows */
     {  MOD4|SHIFT,       XK_j,          move_down,         {NULL}},
     {  MOD4|SHIFT,       XK_k,          move_up,           {NULL}},
     /* swap the current window to master */
-    {  MOD4,             XK_Return,     swap_master,       {NULL}},
+    {  MOD4|SHIFT,       XK_Return,     swap_master,       {NULL}},
     /* maximize the current window */
     {  MOD4,             XK_f,          maximize,          {NULL}},
     /* minimize window to queue/pull window from queue */
@@ -111,18 +117,28 @@ static key keys[] = {
     /* toggle the scratchpad terminal, if enabled */
     {  MOD4,             XK_s,          togglescratchpad,  {NULL}},
 
+
+
+
     /* move floating windows */
-    {  MOD4|MOD1,        XK_j,          float_y,           {.i = +10}},
-    {  MOD4|MOD1,        XK_k,          float_y,           {.i = -10}},
-    {  MOD4|MOD1,        XK_h,          float_x,           {.i = -10}},
-    {  MOD4|MOD1,        XK_l,          float_x,           {.i = +10}},
+    {  MOD4|MOD1|CONTROL,        XK_j,          float_y,           {.i = +10}},
+    {  MOD4|MOD1|CONTROL,        XK_k,          float_y,           {.i = -10}},
+    {  MOD4|MOD1|CONTROL,        XK_h,          float_x,           {.i = -10}},
+    {  MOD4|MOD1|CONTROL,        XK_l,          float_x,           {.i = +10}},
+
+
+
+
     /* resize floating windows */
-    {  MOD4|MOD1|CONTROL,XK_j,          resize_y,          {.i = +10}},
-    {  MOD4|MOD1|CONTROL,XK_k,          resize_y,          {.i = -10}},
-    {  MOD4|MOD1|CONTROL,XK_h,          resize_x,          {.i = -10}},
-    {  MOD4|MOD1|CONTROL,XK_l,          resize_x,          {.i = +10}},
+    {  MOD4|MOD1,               XK_j,          resize_y,          {.i = +10}},
+    {  MOD4|MOD1,               XK_k,          resize_y,          {.i = -10}},
+    {  MOD4|MOD1,               XK_h,          resize_x,          {.i = -10}},
+    {  MOD4|MOD1,               XK_l,          resize_x,          {.i = +10}},
     /* reset the selected floating window to tiling */
     {  MOD4,             XK_t,          tilemize,          {NULL}},
+
+
+
 
     /* mode selection */
     {  MOD4|SHIFT,       XK_t,          switch_mode,       {.i = TILE}},
@@ -135,11 +151,20 @@ static key keys[] = {
     {  MOD4|SHIFT,       XK_z,          rotate_mode,       {.i = -1}},
     {  MOD4|SHIFT,       XK_x,          rotate_mode,       {.i = +1}},
 
+
+
+
+
     /* spawn terminal, menu, w/e you want to */
-    {  MOD4|SHIFT,       XK_Return,     spawn,             {.com = termcmd}},
-    {  MOD4,             XK_r,          spawn,             {.com = screenshotcmd}},
+    {  MOD4,             XK_Return,     spawn,             {.com = termcmd}},
+    {  MOD4,             XK_d,          spawn,             {.com = menucmd}},
+    {  MOD4|SHIFT,       XK_s,          spawn,             {.com = startcmd}},
     /* kill current window */
-    {  MOD4|SHIFT,       XK_c,          killclient,        {NULL}},
+    {  MOD4|SHIFT,       XK_q,          killclient,        {NULL}},
+
+
+
+
 
     /* desktop selection */
        DESKTOPCHANGE(    XK_1,                             0)
@@ -164,11 +189,13 @@ static key keys[] = {
     {  MOD4|CONTROL|SHIFT, XK_h,        rotate_filled,     {.i = -1}},
     {  MOD4|CONTROL|SHIFT, XK_l,        rotate_filled,     {.i = +1}},
 
+
+
     /* resize master/first stack window */
     {  MOD4,             XK_h,          resize_master,     {.i = -10}},
     {  MOD4,             XK_l,          resize_master,     {.i = +10}},
-    {  MOD4,             XK_o,          resize_stack,      {.i = -10}},
-    {  MOD4,             XK_p,          resize_stack,      {.i = +10}},
+    {  MOD4,             XK_j,          resize_stack,      {.i = -10}},
+    {  MOD4,             XK_k,          resize_stack,      {.i = +10}},
 
     /* resize the borders */
     {  MOD4|CONTROL,     XK_u,          adjust_borders,    {.i = -1}},
@@ -180,7 +207,7 @@ static key keys[] = {
     {  MOD4|CONTROL,     XK_b,          togglepanel,       {NULL}},
 
     /* exit */
-    {  MOD4|CONTROL,     XK_q,          quit,              {.i = 0}},
+    {  MOD4,     XK_x,          quit,              {.i = 0}},
 };
 
 /* EDIT THIS: mouse-based shortcuts */
