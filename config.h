@@ -22,7 +22,7 @@
 #define BORDER_WIDTH    2         /* window border width */
 #define SCRATCH_WIDTH   1         /* scratch window border width, 0 to disable */
 #define FOCUS           "#ff00ff" /* focused window border color   */
-#define UNFOCUS         "#121212" /* unfocused window border color */
+#define UNFOCUS         "#e75480" /* unfocused window border color */
 #define SCRATCH         "#cc0000" /* scratchpad border color */
 #define DESKTOPS        10        /* number of desktops - edit DESKTOPCHANGE keys to suit */
 #define DEFAULT_DESKTOP 0         /* the desktop to focus on exec */
@@ -66,10 +66,11 @@ static const AppRule rules[] = { \
  * above
  */
 static const char *termcmd[] = { "st",     NULL };
-static const char *screenshotcmd[] = { "nwggrid",     NULL };
+static const char *fmcmd[] = { "pcmanfm",     NULL };
 static const char *menucmd[] = { "nwggrid", NULL };
 static const char *startcmd[] = { "/home/rohit/.config/FrankenWM/autostart.sh", NULL };
 static const char *scrpcmd[] = { "st", "-T", "scratchpad", NULL };
+
 /* static const char *scrpcmd[] = { "urxvt", "-name", "scratchpad",  NULL }; */
 
 #define DESKTOPCHANGE(K,N) \
@@ -102,7 +103,7 @@ static key keys[] = {
     {  MOD4|SHIFT,       XK_j,          move_down,         {NULL}},
     {  MOD4|SHIFT,       XK_k,          move_up,           {NULL}},
     /* swap the current window to master */
-    {  MOD4|SHIFT,       XK_Return,     swap_master,       {NULL}},
+    {  MOD4|CONTROL,     XK_Return,     swap_master,       {NULL}},
     /* maximize the current window */
     {  MOD4,             XK_f,          maximize,          {NULL}},
     /* minimize window to queue/pull window from queue */
@@ -157,8 +158,9 @@ static key keys[] = {
 
     /* spawn terminal, menu, w/e you want to */
     {  MOD4,             XK_Return,     spawn,             {.com = termcmd}},
-    {  MOD4,             XK_d,          spawn,             {.com = menucmd}},
     {  MOD4|SHIFT,       XK_s,          spawn,             {.com = startcmd}},
+    {  MOD4|SHIFT,       XK_Return,     spawn,             {.com = fmcmd}},
+    {  MOD4,             XK_d,          spawn,             {.com = menucmd}},
     /* kill current window */
     {  MOD4|SHIFT,       XK_q,          killclient,        {NULL}},
 
